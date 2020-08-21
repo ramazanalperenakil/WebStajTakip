@@ -1,0 +1,179 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ana.master.cs" Inherits="ana" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Stajyer Takip Uygulaması</title>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="stiller/ana.css" rel="stylesheet" />
+    <link href="stiller/jquery.lightbox-0.5.css" rel="stylesheet" />
+    <script src="Scripts/jquery-3.0.0.slim.min.js"></script>
+    <script src="Scripts/popper.min.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <script src="js/menu.js"></script>
+    <link href="stiller/jquery.lightbox-0.5.css" rel="stylesheet" />
+    <script src="js/jquery.lightbox-0.5.min.js"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+     <script type="text/javascript">
+    $(function() {
+        $('a.gallery').lightBox();
+    });
+    </script>
+    <style type="text/css">
+	/* jQuery lightBox plugin - Gallery style */
+	#gallery {
+		background-color: #444;
+		padding: 0px;
+		width: 520px;
+	}
+	#gallery ul { list-style: none; }
+	#gallery ul li { display: inline; }
+	#gallery ul img {
+		border: 5px solid #3e3e3e;
+		border-width: 5px 5px 20px;
+	}
+	#gallery ul a:hover img {
+		border: 5px solid #fff;
+		border-width: 5px 5px 20px;
+		color: #fff;
+	}
+	#gallery ul a:hover { color: #fff; }
+	</style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div>
+            <nav class="navbar navbar-dark bg-dark navbar-expand-sm">
+                <h4 class="navbar-brand"><a href="#">Stajyer Takip Sistemi</a></h4>
+
+
+                <div class="ml-auto">
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-list-4" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbar-list-4">
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown dropleft">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <asp:Repeater ID="RepeaterAvatarOgrenci" runat="server" Visible="false">
+                                        <ItemTemplate>
+                                            <img id="avatar" src="<%# Eval("ogr_resimi") %>" width="40" height="40" class="rounded-circle">
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+                                    <asp:Repeater ID="RepeaterAvatarOgretmen" runat="server" Visible="false">
+                                        <ItemTemplate>
+                                            <img id="avatar" src="<%# Eval("hoca_resim") %>" width="40" height="40" class="rounded-circle">
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+
+                                    <asp:Repeater ID="RepeaterAvatarKurum" runat="server" Visible="false">
+                                        <ItemTemplate>
+                                            <img id="avatar" src="<%# Eval("kurum_resim") %>" width="40" height="40" class="rounded-circle">
+                                        </ItemTemplate>
+
+                                    </asp:Repeater>
+
+                                    <asp:Label ID="lblKullanici" runat="server" Text="" CssClass="ml-2 text-white"></asp:Label>
+
+
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    
+
+                                    <a class="dropdown-item" href="cik.aspx">Çıkış Yap</a>
+
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+            <asp:Panel ID="PanelSag" runat="server">
+            <div id="yonetimTasiyici" class="container-fluid  row ">
+                
+                <div id="solmenu" class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-3 pl-0 accordion ">
+                    <asp:Panel ID="PanelOgrenci" runat="server" Visible="false">
+                        <asp:Button ID="ButtonAnasayfa" runat="server" CssClass="btn btn-block  btn-bitbucket btn-primary" Text="Anasayfa" Height="50px" OnClick="ButtonAnasayfa_Click1" />
+
+                        <asp:Button ID="BasvuruYap" runat="server" CssClass="btn btn-block  btn-bitbucket btn-success" Text="Staj Başvurus Yap" Height="50px" OnClick="BasvuruYap_Click" />
+
+
+                        <asp:Button ID="BilgiGuncelle" runat="server" CssClass="btn btn-block  btn-bitbucket btn-instagram" Text="Bilgilerimi Güncelle" Height="50px" OnClick="BilgiGuncelle_Click" />
+
+
+
+                    </asp:Panel>
+                    <asp:Panel ID="PanelOgretmen" runat="server" Visible="false">
+                        <asp:Button ID="ButonAnasayfaOgretmen" runat="server" CssClass="btn btn-block  btn-bitbucket btn-primary" Text="Anasayfa" Height="50px" OnClick="ButonAnasayfaOgretmen_Click" />
+
+
+                        <asp:Button ID="ButtonOgretmenStajyerGoruntule" runat="server" CssClass="btn btn-block  btn-bitbucket btn-success" Text="Stajyerleri Görüntüle" Height="50px" OnClick="ButtonOgretmenStajyerGoruntule_Click" />
+
+
+                        <asp:Button ID="ButtonHocaTumOgrencileriGoruntule" runat="server" CssClass="btn btn-block  btn-bitbucket btn-instagram" Text="Tüm Ogrencileri Goruntule" Height="50px" OnClick="ButtonHocaTumOgrencileriGoruntule_Click" />
+
+
+                        <asp:Button ID="ButtonStajyerlereAitKurumlar" runat="server" CssClass="btn btn-block  btn-bitbucket btn-outline-light" Text="Stajyerlerin Kurumlarini Goruntule" Height="50px" OnClick="ButtonStajyerlereAitKurumlar_Click" />
+
+                        <asp:Button ID="ButtonHocaBilgiGuncelle" runat="server" CssClass="btn btn-block  btn-bitbucket btn-warning" Text="Bilgilerimi Güncelle" Height="50px" OnClick="ButtonHocaBilgiGuncelle_Click"  />
+
+                          <asp:Button ID="ButtonOgrenciEkle" runat="server" CssClass="btn btn-block  btn-bitbucket btn-primary" Text="Öğrenci Ekle" Height="50px" OnClick="ButtonOgrenciEkle_Click"  />
+
+                          <asp:Button ID="ButtonKurumEkle" runat="server" CssClass="btn btn-block  btn-bitbucket btn-success" Text="Kurum Ekle" Height="50px" OnClick="ButtonKurumEkle_Click"  />
+
+
+                    </asp:Panel>
+
+
+                    <asp:Panel ID="PanelKurum" runat="server" Visible="false">
+                        <asp:Button ID="ButtonKurumAnasayfa" runat="server" CssClass="btn btn-block  btn-bitbucket btn-primary" Text="Anasayfa" Height="50px" OnClick="ButtonKurumAnasayfa_Click" />
+
+
+                        <asp:Button ID="ButtonKurumdakiStajyerler" runat="server" CssClass="btn btn-block  btn-bitbucket btn-success" Text="Stajyerleri Görüntüle" Height="50px" OnClick="ButtonKurumdakiStajyerler_Click" />
+
+                        <asp:Button ID="ButtonKurumBilgiGuncelle" runat="server" CssClass="btn btn-block  btn-bitbucket btn-instagram" Text="Bilgi Güncelle" Height="50px" OnClick="ButtonKurumBilgiGuncelle_Click" />
+                    </asp:Panel>
+
+
+                </div>
+                   
+
+
+
+                <div id="yonetimsag" class="col-12 col-sm-6 col-md-12 col-lg-9 col-xl-9 pl-0 ">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+            </asp:Panel>
+            <script runat="server">
+                protected string GetTime()
+                {
+                    return DateTime.Now.Year.ToString();
+
+                }
+            </script>
+            <footer class="jumbotron-fluid mt-3 pt-4 pb-5 bg-dark text-white-50 text-center ">
+                <p>&copy  <%= GetTime() %> Staj Kayıt ve Yönetim Paneli Herk Hakkı Saklıdır.</p>
+
+            </footer>
+
+        </div>
+    </form>
+
+</body>
+</html>
+
